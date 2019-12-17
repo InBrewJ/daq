@@ -56,9 +56,10 @@ cat <<EOF >> local/system.conf
 fail_hook=misc/dump_network.sh
 test_config=misc/runtime_configs/long_wait
 site_path=inst/test_site
-startup_faux_1_opts="brute"
-startup_faux_2_opts="nobrute expiredtls bacnetfail pubber passwordfail"
-startup_faux_3_opts="tls macoui passwordpass bacnet pubber"
+startup_faux_1_opts="broadcast_client multicast_client"
+startup_faux_2_opts="nobrute expiredtls bacnetfail pubber"
+startup_faux_3_opts="brute tls macoui bacnet pubber ntp_client broadcast_client multicast_client"
+monitor_scan_sec=300
 EOF
 
 if [ -f $cred_file ]; then
@@ -93,6 +94,7 @@ capture_aux_test_results macoui all
 capture_aux_test_results tls all
 capture_aux_test_results password all
 capture_aux_test_results discover all
+capture_aux_test_results network all
 
 # Capture peripheral logs
 more inst/run-port-*/scans/dhcp_triggers.txt | cat
@@ -110,6 +112,7 @@ more inst/run-port-*/nodes/tls*/activate.log | cat
 more inst/run-port-*/nodes/password*/activate.log | cat
 more inst/run-port-*/nodes/discover*/activate.log | cat
 more inst/run-port-*/nodes/bacext*/activate.log | cat
+more inst/run-port-*/nodes/network*/activate.log | cat
 ls inst/fail_fail01/ | tee -a $TEST_RESULTS
 
 # Add the port-01 and port-02 module config into the file
