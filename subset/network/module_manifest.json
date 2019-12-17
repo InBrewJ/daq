@@ -1,0 +1,11 @@
+{
+    "connection.dhcp_long" : {
+        "desc" : "Device sends ARP request on DHCP lease expiry."
+    },
+    "connection.min_send" : {
+        "desc" : "Device sends application packets at a frequency of less than 5 minutes."
+    },
+    "network.ntp.support" : {
+        "desc" : "Device sends NTP request packets."
+    }
+}
