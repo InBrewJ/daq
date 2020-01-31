@@ -1,0 +1,8 @@
+{
+    "absolutely.nothing" : {
+        "desc" : "This test does absolutely nothing"
+    },
+    "needless.script.kiddie" : {
+        "desc" : "I found a script on the internet, now it's a DAQ test. Adapted from: https://github.com/Ha3MrX/DDos-Attack/blob/master/ddos-attack.py"
+    }
+}
