@@ -8,9 +8,7 @@ REPORT=/tmp/report.txt
 LOCAL_REPORT=/tmp/local.report.txt
 CONFIG=/config/device/module_config.json
 MANIFEST=./module_manifest.json
-
-# Test definition
-
+RESULT_LINES=/tmp/result_lines.txt
 REDACTED_LOG=/tmp/script.kiddie.report.log
 
 # Execute the test binaries
@@ -21,20 +19,14 @@ python3 ddos.py -p 80 -a $TARGET_IP | tee -a $REDACTED_LOG
 
 echo Running test that does nothing... | tee -a $REDACTED_LOG
 
-# Write results to the .md report
+python3 ddos.py -n | tee -a $REDACTED_LOG
 
-RESULT_AND_SUMMARY="$(grep "RESULT" $LOCAL_REPORT)"
-grep -v "RESULT" $LOCAL_REPORT >> $REDACTED_LOG
+# Write out a report monolog
 
-echo Writing...
+cat $RESULT_LINES
 
-write_out_result $REPORT \
-                 "needless.script.kiddie" \
-                 "$(jq -r '.["needless.script.kiddie"].desc' $MANIFEST)" \
-                 "This test ran fine" \
-                 "$RESULT_AND_SUMMARY"
-
-echo Writing done...
-
-# [ $(check_for_fails_in "${result_lines[@]}") == false ]
+write_out_monolog $REPORT \
+                  $MANIFEST \
+                  $REDACTED_LOG \
+                  $RESULT_LINES
 
