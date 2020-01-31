@@ -5,22 +5,19 @@
 source reporting.sh
 
 REPORT=/tmp/report.txt
-LOCAL_REPORT=report/report.txt
+LOCAL_REPORT=/tmp/local.report.txt
 CONFIG=/config/device/module_config.json
-LOG=/tmp/nmap.log
-RESULT_LINES=/tmp/result_lines.txt
+MANIFEST=./module_manifest.json
 
 # Test definition
 
-TEST_NAME="connection.mac_oui"
-TEST_DESCRIPTION="Check Physical device address OUI against IEEE registration and verify it is registered with the correct manufacturer"
-REDACTED_LOG=/tmp/macoui.report.log
+REDACTED_LOG=/tmp/script.kiddie.report.log
 
 # Execute the test binaries
 
 echo Running spurious DDoS script... | tee -a $REDACTED_LOG
 
-java -jar mac_oui/build/libs/mac_oui-all.jar $TARGET_MAC
+python3 ddos.py -p 80 -a $TARGET_IP | tee -a $REDACTED_LOG
 
 echo Running test that does nothing... | tee -a $REDACTED_LOG
 
@@ -29,13 +26,15 @@ echo Running test that does nothing... | tee -a $REDACTED_LOG
 RESULT_AND_SUMMARY="$(grep "RESULT" $LOCAL_REPORT)"
 grep -v "RESULT" $LOCAL_REPORT >> $REDACTED_LOG
 
+echo Writing...
+
 write_out_result $REPORT \
-                 "$TEST_NAME" \
-                 "$TEST_DESCRIPTION" \
-                 "$(cat $REDACTED_LOG)" \
+                 "needless.script.kiddie" \
+                 "$(jq -r '.["needless.script.kiddie"].desc' $MANIFEST)" \
+                 "This test ran fine" \
                  "$RESULT_AND_SUMMARY"
 
-result_lines=( "$RESULT_AND_SUMMARY" )
+echo Writing done...
 
-[ $(check_for_fails_in "${result_lines[@]}") == false ]
+# [ $(check_for_fails_in "${result_lines[@]}") == false ]
 
