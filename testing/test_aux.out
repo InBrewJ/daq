@@ -70,6 +70,9 @@ port-01 module_config modules
   "macoui": {
     "enabled": true
   },
+  "needless": {
+    "enabled": true
+  },
   "nmap": {
     "enabled": true
   },
@@ -93,9 +96,6 @@ port-01 module_config modules
   },
   "udmi": {
     "enabled": true
-  },
-  "needless": {
-    "enabled": true
   }
 }
 port-02 module_config modules
@@ -110,6 +110,9 @@ port-02 module_config modules
     "enabled": false
   },
   "macoui": {
+    "enabled": true
+  },
+  "needless": {
     "enabled": true
   },
   "nmap": {
@@ -128,9 +131,6 @@ port-02 module_config modules
     "enabled": true
   },
   "udmi": {
-    "enabled": true
-  },
-  "needless": {
     "enabled": true
   }
 }
