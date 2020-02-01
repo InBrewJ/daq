@@ -38,6 +38,9 @@ RESULT pass security.passwords.telnet  Default passwords have been changed
 RESULT pass security.passwords.ssh Default passwords have been changed
 RESULT skip security.firmware Could not retrieve a firmware version with nmap. Check bacnet port.
 RESULT pass security.firmware version found: ?\xFF\xFF\x19,>u\x08\x00no
+RESULT pass needless.script.kiddie The server is now down. hooray
+RESULT pass needless.nothing Nothing happened
+
 dhcp requests 2 1
 01: ['01:brute:1', '01:macoui:1']
 02: ['02:nmap:1', '02:tls:1']
@@ -90,6 +93,9 @@ port-01 module_config modules
   },
   "udmi": {
     "enabled": true
+  },
+  "needless": {
+    "enabled": true
   }
 }
 port-02 module_config modules
@@ -122,6 +128,9 @@ port-02 module_config modules
     "enabled": true
   },
   "udmi": {
+    "enabled": true
+  },
+  "needless": {
     "enabled": true
   }
 }

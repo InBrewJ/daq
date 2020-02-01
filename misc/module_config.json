@@ -26,6 +26,9 @@
     },
     "udmi": {
       "enabled": true
+    },
+    "needless": {
+      "enabled": true
     }
   }
 }
